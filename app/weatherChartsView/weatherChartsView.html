@@ -1,0 +1,113 @@
+<div>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Stacja pogody wykresy
+		</h1>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+                <div class="box-header with-border">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('wind','Wiatr')">Wiatr</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('pressure','Ciśnienie')">Ciśnienie</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('tempExt','Temperatura')">Temperatura</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('humidity','Wilgotność')">Wilgotność</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('tempBat','Temperatura baterii')">Temperatura baterii</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.load('batVol','Napięcie baterii')">Napięcie baterii</button>
+                        <div class="col-sm-1" style="line-height:30px">
+                            <label for="size">Probes</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input ng-model="size" type="number" min="0" step="1000" id="size" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <div  style="height: 500px">
+                            <am-chart id="weatherChart" options="ctrl.amChartOptions" height="100%" width="100%"></am-chart>
+                        </div>
+                    </div>
+                </div>
+		    </div>
+		</div>
+	</div>
+	</section>
+
+	<!--<script src="/resources/amcharts/amcharts.js"></script>-->
+	<!--<script src="/resources/amcharts/serial.js"></script>-->
+	<!--<script src="/resources/amcharts/themes/light.js"></script>-->
+	<!--<script src="/resources/amcharts/plugins/dataloader/dataloader.min.js" ></script>-->
+
+	<!--<script type="text/javascript">-->
+<!--function drawChart(param,title){-->
+	<!--var chart = AmCharts.makeChart("chartdiv", {-->
+	    <!--"type": "serial",-->
+	    <!--"theme": "light",-->
+	    <!--"marginRight": 80,-->
+	    <!--"valueAxes": [{-->
+	        <!--"position": "left",-->
+	        <!--"title": title-->
+	    <!--}],-->
+	    <!--"graphs": [{-->
+	        <!--"id": "g1",-->
+	        <!--"fillAlphas": 0.4,-->
+	        <!--"valueField": "value",-->
+	         <!--"balloonText": "<div style='margin:5px; font-size:19px;'>"+title+":<b>[[value]]</b></div>"-->
+	    <!--}],-->
+	    <!--"chartScrollbar": {-->
+	        <!--"graph": "g1",-->
+	        <!--"scrollbarHeight": 80,-->
+	        <!--"backgroundAlpha": 0,-->
+	        <!--"selectedBackgroundAlpha": 0.1,-->
+	        <!--"selectedBackgroundColor": "#888888",-->
+	        <!--"graphFillAlpha": 0,-->
+	        <!--"graphLineAlpha": 0.5,-->
+	        <!--"selectedGraphFillAlpha": 0,-->
+	        <!--"selectedGraphLineAlpha": 1,-->
+	        <!--"autoGridCount": true,-->
+	        <!--"color": "#AAAAAA"-->
+	    <!--},-->
+	    <!--"chartCursor": {-->
+	        <!--"categoryBalloonDateFormat": "JJ:NN, DD/MM",-->
+	        <!--"cursorPosition": "mouse"-->
+	    <!--},-->
+	    <!--"categoryField": "date",-->
+	    <!--"categoryAxis": {-->
+	        <!--"minPeriod": "mm",-->
+	        <!--"parseDates": true-->
+	    <!--},-->
+	    <!--"export": {-->
+	        <!--"enabled": true-->
+	    <!--},-->
+	    <!--"dataLoader": {-->
+	        <!--"url": "http://localhost:8080/weatherData.json?param="+param,-->
+	        <!--"format": "json"-->
+	     <!--}-->
+
+	<!--});-->
+
+	<!--chart.addListener("dataUpdated", zoomChart);-->
+	<!--//when we apply theme, the dataUpdated event is fired even before we add listener, so-->
+	<!--//we need to call zoomChart here-->
+	<!--zoomChart();-->
+	<!--//this method is called when chart is first inited as we listen for "dataUpdated" event-->
+
+	<!--function zoomChart() {-->
+		<!--// different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues-->
+		<!--var start = new Date();-->
+		<!--start.setHours(0, 0, 0, 0);-->
+		<!--var end = new Date();-->
+		<!--end.setHours(23, 59, 59, 999)-->
+		<!--chart.zoomToDates(start, end);-->
+	<!--}-->
+<!--}-->
+<!--drawChart("wind", "Wiatr");-->
+<!--</script>-->
+</div>
+<!-- /.content -->
