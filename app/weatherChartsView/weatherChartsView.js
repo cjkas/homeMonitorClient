@@ -1,19 +1,6 @@
 'use strict';
 
-angular.module('myApp.weatherChartsView', ['ngRoute', 'amChartsDirective'])
-
-.config(function($routeProvider) {
-  $routeProvider.when('/weatherChartsView', {
-    templateUrl: 'weatherChartsView/weatherChartsView.html',
-    controller: 'WeatherChartsController',
-    controllerAs: 'ctrl',
-     access: {
-        loginRequired: true,
-        authorizedRoles: [USER_ROLES.all]
-    }
-  });
-})
-
+angular.module('myApp.weatherChartsView')
 .controller('WeatherChartsController', ['$scope', 'WeatherService', function($scope, WeatherService) {
     var self = this;
     self.load = load;
@@ -34,7 +21,7 @@ angular.module('myApp.weatherChartsView', ['ngRoute', 'amChartsDirective'])
             id: "g1",
             fillAlphas: 0.4,
             valueField: "value",
-            balloonText: "<div style='margin:5px; font-size:19px;'>"+$scope.title+":<b>[[value]]</b></div>"
+            balloonText: "<div style='margin:5px; font-size:19px;'><b>[[value]]</b></div>"
         }],
         chartScrollbar: {
             graph: "g1",
@@ -65,11 +52,11 @@ angular.module('myApp.weatherChartsView', ['ngRoute', 'amChartsDirective'])
     };
 
     function load(param, title) {
-        console.log("load "+param);
         WeatherService.filter(param, $scope.size).then(
             function(data) {
                 $scope.title = title;
                 $scope.$broadcast("amCharts.updateData", data, "weatherChart");
+                $scope.$broadcast("amCharts.zoom", "weatherChart");
             },
             function(errResponse){
                 console.error('Error while fetching param '+param);
