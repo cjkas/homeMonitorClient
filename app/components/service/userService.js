@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $q){
+myApp.factory('UserService', ['$http', '$q', function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:8080/user/';
+    var REST_SERVICE_URI = URL+'/user/';
 
     var factory = {
         fetchAllUsers: fetchAllUsers,
         updateUser:updateUser,
+        createUser:createUser,
+        deleteUser:deleteUser
     };
 
     return factory;
@@ -26,10 +28,9 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
         return deferred.promise;
     }
 
-
-    function updateUser(user, id) {
+    function deleteUser(id) {
         var deferred = $q.defer();
-        $http.put(REST_SERVICE_URI+id, user)
+        $http.delete(REST_SERVICE_URI+id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
@@ -41,5 +42,36 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
         );
         return deferred.promise;
     }
+
+
+    function updateUser(user) {
+        var deferred = $q.defer();
+        $http.put(REST_SERVICE_URI, user)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while updating User');
+                deferred.reject(errResponse);
+            }
+        );
+        return deferred.promise;
+    }
+
+    function createUser(user) {
+            var deferred = $q.defer();
+            $http.post(REST_SERVICE_URI, user)
+                .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while updating User');
+                    deferred.reject(errResponse);
+                }
+            );
+            return deferred.promise;
+        }
 
 }]);

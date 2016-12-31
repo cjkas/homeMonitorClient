@@ -1,21 +1,7 @@
 'use strict';
 
-angular.module('myApp.weatherView', ['ngRoute'])
-
-.config(function($routeProvider) {
-  $routeProvider.when('/weatherView', {
-    templateUrl: 'weatherView/weatherView.html',
-    controller : 'WeatherController',
-    controllerAs : 'ctrl',
-     access: {
-        loginRequired: true,
-        authorizedRoles: [USER_ROLES.all]
-    }
-  });
-})
-
+angular.module('myApp.weatherView')
 .controller('WeatherController', ['$scope', 'WeatherService', function($scope, WeatherService) {
-console.log("1");
     var self = this;
 
     self.probe;

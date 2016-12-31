@@ -1,5 +1,11 @@
 'use strict';
 
+var USER_ROLES = {
+    all: '*',
+    admin: 'ADMIN',
+    user: 'USER'
+};
+
 angular.module('myApp').service('Session', function () {
     this.create = function (data) {
         this.id = data.id;
@@ -21,7 +27,6 @@ angular.module('myApp').service('Session', function () {
 });
 
 angular.module('myApp').service('AuthSharedService', ['$rootScope', '$http', '$resource', 'authService', 'Session', function ($rootScope, $http, $resource, authService, Session) {
-    var URL = "http://localhost:8080";
 
     return {
         login: function (user) {
@@ -30,7 +35,6 @@ angular.module('myApp').service('AuthSharedService', ['$rootScope', '$http', '$r
             };
             $http.post(URL+'/authenticate', user, config)
                 .success(function (data) {
-                    console.log("ret ", data.user)
                     $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
                     authService.loginConfirmed(data.user);
                 })
@@ -44,13 +48,6 @@ angular.module('myApp').service('AuthSharedService', ['$rootScope', '$http', '$r
             $http.get(URL+'/security/account')
                 .then(function (response) {
                     authService.loginConfirmed(response.data);
-                });
-        },
-        createAccount: function (user) {
-            $rootScope.loadingAccount = true;
-            $http.post(URL+'/security/register', user)
-                .then(function (response) {
-                    console.log("created ", user);
                 });
         },
         isAuthorized: function (authorizedRoles) {

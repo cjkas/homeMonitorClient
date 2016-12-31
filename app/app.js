@@ -1,5 +1,7 @@
 'use strict';
 
+var URL = "http://192.168.0.33:8080";
+
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ngResource',
@@ -7,20 +9,13 @@ var myApp = angular.module('myApp', [
   'myApp.weatherView',
   'myApp.weatherChartsView',
   'myApp.loginView',
-  'amChartsDirective'
+  'myApp.usersView',
+  'amChartsDirective',
+  'angular-loading-bar'
 ]);
-myApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-  $routeProvider.otherwise({redirectTo: '/loginView'});
-}]);
 
-var USER_ROLES =  {
-    all: '*',
-    admin: 'ADMIN',
-    user: 'USER'
-};
 
-myApp.run(['$rootScope', '$location', '$http', 'AuthSharedService', 'Session','$q', '$timeout', function ($rootScope, $location, $http, AuthSharedService, Session, $q, $timeout) {
+myApp.run(['$rootScope', '$location', '$http', 'AuthSharedService', 'Session','$q', '$timeout', '$log', function ($rootScope, $location, $http, AuthSharedService, Session, $q, $timeout, $log) {
 
     $rootScope.$on('$routeChangeStart', function (event, next) {
 
@@ -37,7 +32,7 @@ myApp.run(['$rootScope', '$location', '$http', 'AuthSharedService', 'Session','$
 
     // Call when the the client is confirmed
     $rootScope.$on('event:auth-loginConfirmed', function (event, data) {
-        console.log('login confirmed start ' + data);
+        $log.log('login confirmed start ' + data);
             Session.create(data);
             $rootScope.account = Session;
             $rootScope.authenticated = true;
@@ -46,7 +41,7 @@ myApp.run(['$rootScope', '$location', '$http', 'AuthSharedService', 'Session','$
 
     // Call when the 401 response is returned by the server
     $rootScope.$on('event:auth-loginRequired', function (event, data) {
-            console.log("log required");
+            $log.log("log required");
             Session.invalidate();
             $rootScope.authenticated = false;
             $rootScope.loadingAccount = false;
@@ -55,15 +50,15 @@ myApp.run(['$rootScope', '$location', '$http', 'AuthSharedService', 'Session','$
 
     // Call when the 403 response is returned by the server
     $rootScope.$on('event:auth-forbidden', function (rejection) {
-    console.log("log forbidden");
+    $log.log("log forbidden");
         $rootScope.$evalAsync(function () {
-            $location.path('/error/403').replace();
+            $location.path('/errorView/403').replace();
         });
     });
 
     // Call when the user logs out
     $rootScope.$on('event:auth-loginCancelled', function () {
-    console.log("log loginCancelled");
+    $log.log("log loginCancelled");
         $location.path('/loginView').replace();
     });
 
