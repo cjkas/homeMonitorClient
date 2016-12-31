@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/assets/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="/assets/dist/style.css">
 
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
@@ -70,6 +71,17 @@
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <img src="https://developers.google.com/experts/img/user/user-default.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">Admin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
@@ -89,6 +101,15 @@
                         <li><a href="#!/weatherChartsView"><i class="fa fa-circle-o"></i> Wykresy</a></li>
                     </ul>
                 </li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-gears"></i> <span>Administracja</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
+                        <li><a href="#!/usersView"><i class="fa fa-circle-o"></i> Użytkownicy</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -104,17 +125,21 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 <script src="/assets/dist/js/skin.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-route/angular-route.js"></script>
-<script src="/bower_components/angular-resource/angular-resource.js"></script>
-<script src="/bower_components/angular-http-auth/dist/http-auth-interceptor.js"></script>
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.min.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+<script src="/bower_components/angular-http-auth/dist/http-auth-interceptor.min.js"></script>
 <script src="/app.js"></script>
+<script src="/app.route.js"></script>
+<script src="/components/auth.js"></script>
+<script src="/components/service/weatherService.js"></script>
+<script src="/components/service/userService.js"></script>
 <script src="/weatherChartsView/weatherChartsView.js"></script>
 <script src="/weatherView/weatherView.js"></script>
 <script src="/loginView/loginView.js"></script>
-<script src="/components/service/weatherService.js"></script>
-<script src="/components/service/userService.js"></script>
-<script src="/components/auth.js"></script>
+<script src="/usersView/usersView.js"></script>
 <script src="/bower_components/amcharts3/amcharts/amcharts.js"></script>
 <script src="/bower_components/amcharts3/amcharts/serial.js"></script>
 <script src="/bower_components/amcharts3/amcharts/themes/light.js"></script>
