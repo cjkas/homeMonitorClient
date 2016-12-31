@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp').factory('WeatherService', ['$http', '$q', function($http, $q){
+myApp.factory('WeatherService', ['$http', '$q', function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:8080/weather';
+    var REST_SERVICE_URI = URL+'/weather';
 
     var factory = {
         fetchLast: fetchLast,
