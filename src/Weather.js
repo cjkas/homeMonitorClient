@@ -21,7 +21,7 @@ class Weather extends Component {
     }
 
     check() {
-        const elapsed = new Date() - this.state.probe.created;
+        const elapsed = new Date() - Moment(this.state.probe.created);
         this.setState({remaining: parseInt(600 - elapsed / 1000, 10)});
         if (this.state.remaining <= 0) {
             clearInterval(this.state.interval);
@@ -30,7 +30,7 @@ class Weather extends Component {
     }
 
     fetchLast() {
-        const URL = "http://192.168.0.33:8080";
+        const URL = "https://hmb.sczaja.synology.me";
         const REST_SERVICE_URI = URL + '/weather';
         fetch(REST_SERVICE_URI + "/last")
             .then(response => response.json())

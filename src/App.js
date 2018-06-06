@@ -84,7 +84,7 @@ class App extends Component {
                             </div>
                         </nav>
                     </header>
-                    <Router>
+                    <Router basename={'/hm'}>
                         <div>
                             {/* Left side column. contains the logo and sidebar */}
                             <aside className="main-sidebar">

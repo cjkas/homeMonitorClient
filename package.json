@@ -2,6 +2,7 @@
   "name": "hmc",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sczaja.synology.me/hm/",
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.1.0",
     "fetch-intercept": "^2.2.3",

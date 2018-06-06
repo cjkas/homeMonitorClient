@@ -1,25 +1,6 @@
 import React, {Component} from 'react';
 import AmCharts from '@amcharts/amcharts3-react';
 
-function generateData() {
-    var firstDate = new Date();
-
-    var dataProvider = [];
-
-    for (var i = 0; i < 100; ++i) {
-        var date = new Date(firstDate.getTime());
-
-        date.setDate(i);
-
-        dataProvider.push({
-            date: date,
-            value: Math.floor(Math.random() * 100)
-        });
-    }
-
-    return dataProvider;
-}
-
 export default class WeatherCharts extends Component {
 
     constructor() {
@@ -34,7 +15,7 @@ export default class WeatherCharts extends Component {
     }
 
     filter(type) {
-        const URL = "http://192.168.0.33:8080";
+        const URL = "https://hmb.sczaja.synology.me";
         const REST_SERVICE_URI = URL + '/weather';
         fetch(REST_SERVICE_URI + "/filter/" + type + "/" + this.state.probes)
             .then(response => response.json())
