@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Provider} from 'react-redux';
 import './App.css';
 import {IntlProvider} from 'react-intl';
 import SimpleLoadingBar from 'react-simple-loading-bar'
@@ -7,10 +8,13 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-import Weather from './Weather';
-import WeatherCharts from './WeatherCharts';
+import Weather from './components/Weather';
+import WeatherCharts from './components/WeatherCharts';
 import fetchIntercept from 'fetch-intercept';
+import configureStore from './store/configureStore';
 import Error from "./Error";
+
+const store = configureStore();
 
 class App extends Component {
 
@@ -49,8 +53,11 @@ class App extends Component {
 
     }
 
+
+
     render() {
         return (
+            <Provider store={store}>
             <IntlProvider locale="en">
                 <div className="wrapper">
                     {/* Main Header */}
@@ -129,6 +136,7 @@ class App extends Component {
 
                 </div>
             </IntlProvider>
+            </Provider>
         );
     }
 }
