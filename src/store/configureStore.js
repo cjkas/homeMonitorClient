@@ -1,10 +1,18 @@
-import { createStore, applyMiddleware } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+
 import weatherReducer from '../reducers/weatherReducer';
-export default function configureStore() {
+
+export const sagaMiddleware = createSagaMiddleware();
+// dev tools middleware
+const reduxDevTools =
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+export function configureStore() {
     return createStore(
         weatherReducer,
-        applyMiddleware(thunk, logger)
+        reduxDevTools,
+        applyMiddleware(sagaMiddleware, logger)
     );
-}
+};

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {FormattedNumber} from 'react-intl';
 import Moment from "moment";
 import {connect} from 'react-redux';
-import weatherAction from '../actions/weatherAction';
+// import weatherAction from '../actions/weatherAction';
 
 
 class Weather extends Component {
@@ -190,7 +190,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(weatherAction(url))
+        fetchData: (url) => dispatch({ type: "FETCH_WEATHER"})
     };
 };
 
